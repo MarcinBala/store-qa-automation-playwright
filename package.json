@@ -1,0 +1,23 @@
+{
+  "name": "store-qa-automation",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD\r # Store QA Automation\r Playwright + TypeScript E2E automated tests for an e-commerce web app (Automation Test Store).\r >>>>>>> bcf92d4 (Initial project setup)",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarcinBala/store-qa-automation-playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/MarcinBala/store-qa-automation-playwright/issues"
+  },
+  "homepage": "https://github.com/MarcinBala/store-qa-automation-playwright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "@types/node": "^25.0.9"
+  }
+}
