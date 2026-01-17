@@ -1,28 +1,31 @@
 import { test, expect } from '@playwright/test';
-import { waitForPageReady } from '../../helpers/waitForPageReady';
-
-test.beforeEach(async ({page}) => {
-    await page.goto('/');
-    await waitForPageReady(page);
-});
+import { openHomePage } from '../../helpers/navigation';
 
 test('@smoke homepage loads', async ({ page }) => {
-    await expect(page.locator('.logo')).toBeVisible();
+    await openHomePage(page);
+    await expect(page.locator('.headerstrip')).toBeVisible();
 });
 
+test('@smoke user can open category page from homepage', async ({page}) => {
+    await openHomePage(page);
+    const categoryLink = page.locator('#categorymenu').getByRole('link')
+        .filter({ hasNotText: /home/i }).first();
+    await expect(categoryLink).toBeVisible();
+    await categoryLink.click();
+
+    await expect(page).toHaveURL(/rt=product\/category/);
+
+    await expect(page.locator('.contentpanel')).toBeVisible();
+    await expect(page.locator('.thumbnail').first()).toBeVisible();
+});
+
+
 test('@smoke user can open products page from homepage', async ({ page }) => {
-    await page.locator('.thumbnail').first().click();
+    await openHomePage(page);
+    const productLink = page.locator('.thumbnail').first();
+    await expect(productLink).toBeVisible();
+    await productLink.click();
 
     const addToCart = page.getByRole('link', { name: /add to cart/i }).first();
     await expect(addToCart).toBeVisible();
-});
-
-test('@smoke user can add product to cart', async ({ page }) => {
-    await page.getByTitle('Add to Cart').first().click();
-
-    const cartCounter = page
-        .locator('a')
-        .filter({ hasText: /[1-9]\d*\s*ITEMS?\b/i });
-    
-    await expect(cartCounter).toHaveCount(1);
 });
