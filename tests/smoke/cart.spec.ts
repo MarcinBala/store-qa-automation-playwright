@@ -20,6 +20,8 @@ test('@smoke checkout requires login for unauthenticated user', async ({ page })
     await expect(cartButton).toBeVisible();
     await cartButton.click();
 
+    await expect(page).toHaveURL(/rt=checkout\/cart/);
+
     const checkoutButton = page.locator('#cart_checkout1');
     await expect(checkoutButton).toBeVisible();
     await checkoutButton.click();

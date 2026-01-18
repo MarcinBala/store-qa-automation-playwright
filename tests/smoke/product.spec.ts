@@ -12,9 +12,9 @@ test('@smoke product name and price are visible on product page', async ({page})
 
     const price = page.locator('.productfilneprice');
     await expect(price).toBeVisible();
-    await expect(price).not.toHaveText(/\$0\.00/);
-})
+    await expect(price).not.toHaveText(`$${products.bronzer.price}`);
+});
 
 test('@smoke add to cart button is visible on product page', async ({page}) => {
     await expect(page.getByRole('link', { name: /add to cart/i })).toBeVisible();
-})
+});

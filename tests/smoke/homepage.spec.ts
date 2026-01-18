@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { openHomePage } from '../../helpers/navigation';
+import { categories } from '../../test-data/categories';
 
 test('@smoke homepage loads', async ({ page }) => {
     await openHomePage(page);
@@ -8,8 +9,7 @@ test('@smoke homepage loads', async ({ page }) => {
 
 test('@smoke user can open category page from homepage', async ({page}) => {
     await openHomePage(page);
-    const categoryLink = page.locator('#categorymenu').getByRole('link')
-        .filter({ hasNotText: /home/i }).first();
+    const categoryLink = page.getByRole('link', { name: categories.appeal.name });
     await expect(categoryLink).toBeVisible();
     await categoryLink.click();
 
